@@ -8,11 +8,11 @@ install_share  'share';
 
 WriteMakefile(
 	NAME          => 'Authenticate',
-	VERSION   => '0.0.1',
+	VERSION   => '0.0.2',
 	PREREQ_PM => {'Mojolicious' => '8.09'},
 	test      => {TESTS => 't/*.t'},
 	EXE_FILES     => [ qw{
-		script/orion_com
+		script/authenticate
 	} ],
 );
 
