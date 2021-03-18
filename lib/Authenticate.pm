@@ -44,7 +44,7 @@ sub startup ($self) {
 
   $self->pg->migrations->name('authenticate')->from_file(
       $self->dist_dir->child('migrations/authenticate.sql')
-  )->migrate(1);
+  )->migrate(2);
 
   $self->helper(
       user => sub {

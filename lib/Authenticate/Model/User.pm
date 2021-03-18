@@ -1,5 +1,5 @@
 package Authenticate::Model::User;
-use Mojo::Base 'Daje::Utils::Sentinelsender', -signatures;
+use Mojo::Base 'Daje::Utils::Sentinelsender', -signatures, -async_await;
 
 use Try::Tiny;
 use Data::UUID;
@@ -45,7 +45,7 @@ sub login ($self, $user, $password) {
     return $user_obj ;
 }
 
-sub save_user_p ($self, $user) {
+async sub save_user_p ($self, $user) {
 
     my $stmt;
     my $result;
