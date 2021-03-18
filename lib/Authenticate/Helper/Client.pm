@@ -8,12 +8,13 @@ use Data::Dumper;
 has 'endpoint_address';
 has 'key';
 
-async sub save_user ($self, $userid, $username, $active, $passwd) {
+async sub save_user ($self, $userid, $username, $active, $passwd, $support) {
 
     my $user->{userid} = $userid;
     $user->{username} = $username;
     $user->{active} = $active;
     $user->{passwd} = $passwd;
+    $user->{support} = $support;
 
     my $ua = Mojo::UserAgent->new();
 
@@ -64,10 +65,11 @@ async sub register ($self, $userid, $token) {
     return $result->{result};
 }
 
-async sub authenticate ($self, $userid, $token) {
+async sub authenticate ($self, $userid, $token, $system) {
 
     my $user->{userid} = $userid;
     $user->{token} = $token;
+    $user->{system} = $system;
 
     my $ua = Mojo::UserAgent->new();
 

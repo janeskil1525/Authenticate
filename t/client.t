@@ -15,14 +15,14 @@ sub save_user {
         key              => '5210cc3e-8653-44ab-8498-99dd6b12921b',
         endpoint_address => 'http://127.0.0.1:3024'
     )->save_user(
-        'kalle£test', 'Kalle Test', 1, 'Fenix Norr:q81k'
+        'kalle3@test', 'Kalle Test', 1, 'Fenix Norr:q81k', 0
     )->then(sub($result){
 
-        say "result " . $result;
-        return $result->{users_pkey};
+        return $result;
     })->catch(sub($err) {
         say $err;
     })->wait;
+
 }
 
 sub register {
@@ -52,7 +52,7 @@ sub authenticate {
         key              => '5210cc3e-8653-44ab-8498-99dd6b12921b',
         endpoint_address => 'http://127.0.0.1:3024'
     )->authenticate (
-        'kalle£test', '6194d075-1580-455a-bc67-1e381d38cdc6'
+        'kalle£test', '6194d075-1580-455a-bc67-1e381d38cdc6', 'WebShop'
     )->then(sub($result){
 
         say "result " . $result;
@@ -63,9 +63,9 @@ sub authenticate {
     })->wait;
 }
 
-ok(authenticate() > 1);
+#ok(authenticate() > 1);
 #ok(register() > 1);
-#ok(save_user() > 1);
+ok(save_user() > 1);
 
 
 done_testing();

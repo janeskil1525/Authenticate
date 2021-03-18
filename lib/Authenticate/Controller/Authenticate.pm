@@ -9,23 +9,24 @@ sub authenticate ($self) {
     my $body = $self->req->body;
     my $data = decode_json($body);
 
-    $self->app->pg->db->select_p(
-        [
-            'users', ['users_token', users_fkey => 'users_pkey']
-        ],
-            [
-                'userid'
-            ],
-            {
-                userid => $data->{userid},
-                token  => $data->{token}
-            }
+    my $stmt = qq {
+        SELECT userid FROM users
+            JOIN users_token
+        ON users_token.users_fkey = users_pkey
+            JOIN access
+        ON access.users_fkey = users_pkey
+            JOIN system
+        ON system_fkey = system_pkey
+            WHERE userid = ? AND token = ? AND system = ?
+    };
+    $self->app->pg->db->query_p(
+        $stmt, ($data->{userid}, $data->{token}, $data->{system})
     )->then(sub ($result) {
 
-        my $date = 0;
-        $date = $result->hash if $result->rows > 0;
+        my $data = '';
+        $data = $result->hash if $result->rows > 0;
 
-        $self->render(json => {result => $date});
+        $self->render(json => {result => $data});
     })->catch(sub ($err) {
 
         $self->render(json => {result => $err})
