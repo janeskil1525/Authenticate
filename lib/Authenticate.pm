@@ -9,7 +9,7 @@ use Mojo::File;
 use Authenticate::Model::User;
 
 $ENV{AUTHENTICATE_HOME} = '/home/jan/Project/Authenticate/'
-    unless $ENV{AUTHENTICATEHOME};
+    unless $ENV{AUTHENTICATE_HOME};
 
 has dist_dir => sub {
   return Mojo::File->new(
