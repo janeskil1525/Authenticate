@@ -1,5 +1,3 @@
-Authenticate-0.0.1/META.yml
-authenticate.conf
 lib/Authenticate.pm
 lib/Authenticate/Controller/Authenticate.pm
 lib/Authenticate/Controller/Login.pm
