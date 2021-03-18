@@ -3,6 +3,7 @@ lib/Authenticate/Controller/Authenticate.pm
 lib/Authenticate/Controller/Login.pm
 lib/Authenticate/Controller/Register.pm
 lib/Authenticate/Controller/User.pm
+lib/Authenticate/Helper/Access.pm
 lib/Authenticate/Helper/Client.pm
 lib/Authenticate/Model/User.pm
 Makefile.PL
@@ -13,3 +14,4 @@ share/migrations/authenticate.sql
 share/public/index.html
 share/templates/example/welcome.html.ep
 share/templates/layouts/default.html.ep
+
