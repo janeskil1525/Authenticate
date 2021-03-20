@@ -15,7 +15,7 @@ sub save_user {
         key              => '5210cc3e-8653-44ab-8498-99dd6b12921b',
         endpoint_address => 'http://127.0.0.1:3024'
     )->save_user(
-        'kalle3@test', 'Kalle Test', 1, 'Fenix Norr:q81k', 0
+        'kalle4@test', 'Kalle Test', 1, 'Fenix Norr:q81k', 1
     )->then(sub($result){
 
         return $result;

@@ -19,7 +19,8 @@ async sub set_access ($self, $users_fkey, $support) {
             'access',
             {
                 system_fkey => $system->{system_pkey},
-                users_fkey => $users_fkey
+                users_fkey  => $users_fkey,
+                can_login   => $support,
             },
             {
                 on_conflict => undef

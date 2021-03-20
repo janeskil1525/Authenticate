@@ -66,6 +66,7 @@ create table if not exists access
     moddatetime timestamp without time zone NOT NULL DEFAULT NOW(),
     system_fkey bigint not null,
     users_fkey bigint not null,
+    can_login bigint not null DEFAULT 0,
     CONSTRAINT access_pkey PRIMARY KEY (access_pkey),
     CONSTRAINT idx_access_users_fkey FOREIGN KEY (users_fkey)
         REFERENCES users (users_pkey) MATCH SIMPLE
