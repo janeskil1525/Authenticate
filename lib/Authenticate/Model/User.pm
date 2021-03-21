@@ -45,6 +45,28 @@ sub login ($self, $user, $password) {
     return $user_obj ;
 }
 
+async sub login_check_p ($self, $user, $password, $system) {
+
+    my $user_obj;
+    $password = '' unless $password;
+
+    my $stmt = qq {
+        SELECT COUNT(*) as login FROM users
+        JOIN access
+            ON users_fkey = users_pkey
+        JOIN system
+            ON system_fkey = system_pkey
+        WHERE userid = ? AND passwd= ? AND system = ? AND can_login = 1
+
+    };
+    my $passwd = sha512_base64($password);
+    my $result = $self->pg->db->query(
+        $stmt, ($user, $passwd, $system)
+    )->hash->{login};
+
+    return $result ;
+}
+
 async sub save_user_p ($self, $user) {
 
     my $stmt;

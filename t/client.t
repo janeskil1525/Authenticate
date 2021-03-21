@@ -63,9 +63,29 @@ sub authenticate {
     })->wait;
 }
 
+sub login_check {
+
+    my $test = 1;
+
+    Authenticate::Helper::Client->new(
+        key              => '5210cc3e-8653-44ab-8498-99dd6b12921b',
+        endpoint_address => 'http://127.0.0.1:3024'
+    )->login_check(
+        'kalle£test', '123456', 'Basket'
+    )->then(sub($result){
+
+        say "result " . $result;
+        return $result;
+    })->catch(sub($err) {
+        say $err;
+        return $err;
+    })->wait;
+}
+
 #ok(authenticate() > 1);
 #ok(register() > 1);
-ok(save_user() > 1);
+#ok(save_user() > 1);
+ok(login_check() == 0);
 
 
 done_testing();

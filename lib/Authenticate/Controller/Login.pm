@@ -8,17 +8,25 @@ use Digest::SHA qw{sha512_base64};
 use Mojo::JSON qw { decode_json };
 
 
-sub login ($self) {
+sub login_check ($self) {
 
-    say "login_api";
-    say $self->req->body;
+    $self->render_later;
     my $data = decode_json($self->req->body);
 
-    my $user = $self->user->login(
-        $data->{username}, $data->{password}
-    );
-
-    $self->render(json => $user);
+    my $result = $self->user->login_check_p (
+        $data->{userid}, $data->{password}, $data->{system}
+    )->then(sub ($result) {
+        $self->render(
+            json => {result => $result}
+        );
+    })->catch(sub ($err) {
+        $self->render(
+            json => {
+                result => 0,
+                error => $err
+            }
+        );
+    })->wait;
 }
 
 1;

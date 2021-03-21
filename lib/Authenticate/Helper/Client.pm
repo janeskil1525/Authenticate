@@ -92,4 +92,32 @@ async sub authenticate ($self, $userid, $token, $system) {
     my $result = decode_json($body);
     return $result->{result};
 }
+
+async sub login_check ($self, $userid, $password, $system) {
+
+    my $user->{userid} = $userid;
+    $user->{password} = $password;
+    $user->{system} = $system;
+
+    my $ua = Mojo::UserAgent->new();
+
+    my $res = $ua->post(
+        $self->endpoint_address() . '/api/v1/login_check' =>
+            {'X-Token-Check' => $self->key()} =>
+            json => $user
+    )->result;
+    my $body;
+    if($res->is_error){
+        $self->capture_message(
+            'Authenticate', 'Authenticate::Helper::Client::login_check', 'Authenticate::Helper::Client',
+            (caller(0))[3], $res->message
+        );
+        say $res->message;
+    } else {
+        $body = $res->body;
+    }
+
+    my $result = decode_json($body);
+    return $result->{result};
+}
 1;

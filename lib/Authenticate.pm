@@ -78,6 +78,7 @@ sub startup ($self) {
   $auth->post('/v1/authenticate')->to('authenticate#authenticate');
   $auth->post('/v1/save_user')->to('user#save_user');
   $auth->post('/v1/register')->to('register#register');
+  $auth->post('/v1/login_check')->to('login#login_check');
 
 }
 
