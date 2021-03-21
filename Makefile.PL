@@ -8,7 +8,7 @@ install_share  'share';
 
 WriteMakefile(
 	NAME          => 'Authenticate',
-	VERSION   => '0.0.4',
+	VERSION   => '0.1.0',
 	PREREQ_PM => {'Mojolicious' => '8.09'},
 	test      => {TESTS => 't/*.t'},
 	EXE_FILES     => [ qw{
